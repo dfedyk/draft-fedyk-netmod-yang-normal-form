@@ -1,0 +1,11 @@
+*.txt
+*.html
+*.pdf
+*.xml
+!template.xml
+lib/
+.refcache/
+.targets.mk
+*~
+\#*
+.\#*

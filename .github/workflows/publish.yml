@@ -1,0 +1,40 @@
+name: "Build and Publish"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: "Build and Publish Drafts"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Setup"
+        id: setup
+        uses: martinthomson/i-d-template@v1
+        with:
+          make: setup
+
+      - name: "Build Drafts"
+        uses: martinthomson/i-d-template@v1
+        with:
+          token: ${{ github.token }}
+
+      - name: "Upload Artifacts"
+        uses: actions/upload-artifact@v4
+        with:
+          path: |
+            draft-*.html
+            draft-*.txt
+
+      - name: "Update GitHub Pages"
+        if: ${{ github.event_name == 'push' }}
+        uses: martinthomson/i-d-template@v1
+        with:
+          make: gh-pages
+          token: ${{ github.token }}

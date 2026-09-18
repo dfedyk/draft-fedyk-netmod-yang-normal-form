@@ -1,0 +1,21 @@
+name: "Update Generated Content"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  update:
+    name: "Update Generated Content"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Update Editor's Copy and gh-pages"
+        uses: martinthomson/i-d-template@v1
+        with:
+          make: gh-pages
+          token: ${{ github.token }}
