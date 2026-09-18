@@ -30,13 +30,10 @@ author:
 normative:
   RFC7950:
   RFC8342:
-  RFC8525:
   RFC7951:
   RFC6241:
 
 informative:
-  RFC8340:
-  RFC8791:
 
 
 --- abstract
